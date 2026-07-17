@@ -1,30 +1,29 @@
-# Documind AI Pro
+# Documind AI
 
-AI PDF Assistant for Persian & English Documents
+AI-powered document assistant using Local LLM and RAG technology.
 
-## Features
+## 🚀 Features
 
-- Read PDF files
-- Chat with your documents
-- Completely offline
-- Persian support
-- Multiple AI models
-- Beautiful interface
-- Fast responses
+- Chat with PDF documents
+- Local AI models using Ollama
+- Intelligent document search
+- Vector database support
+- Conversation memory
+- Persian language support
+- Gradio web interface
 
-## Supported Models
-
-- Gemma 2
-- Llama 3.1
-- Mistral
-
-## Technologies
+## 🧠 Technology Stack
 
 - Python
 - Gradio
 - Ollama
-- PyPDF2
+- LangChain
+- Vector Database
+- Embeddings
 
-## Version
+## 📦 Installation
 
-v1.0
+Clone the repository:
+
+```bash
+git clone https://github.com/rezaAIPro/Documind-AI-pro.git
