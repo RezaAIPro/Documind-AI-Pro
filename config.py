@@ -11,3 +11,10 @@ WELCOME_MESSAGE = """
 ✅ Extract key information  
 ✅ 100% Private - Runs locally
 """
+# Languages
+LANGUAGES = [
+    "فارسی",
+    "English"
+]
+
+DEFAULT_LANGUAGE = "فارسی"

@@ -15,8 +15,8 @@ pdf_text = ""
 
 chat_engine.history = memory.load()
 
-
-def chat(message, history, model):
+def chat(message, history, model, language):
+    print("chat function called")
     global pdf_text
 
     final_message = message
@@ -43,7 +43,7 @@ If the answer is not found in the context,
 say that the document does not contain enough information.
 """
 
-    answer = chat_engine.chat(final_message, model)
+    answer = chat_engine.chat(final_message, model, language)
 
     history.append({
         "role": "user",
@@ -105,48 +105,66 @@ with gr.Blocks(
     title=APP_TITLE,
     css="style.css"
 ) as demo:
+    gr.Markdown("""
+# 🧠 Documind AI Pro
+
+### 📚 Local AI Assistant with Memory & PDF Chat
+
+👤 **Memory:** Active  
+🤖 **Default Model:** Gemma2
+""")
 
     gr.Markdown(WELCOME_MESSAGE)
 
     with gr.Row():
 
-        with gr.Column(scale=1):
+       with gr.Column(scale=1):
 
-            model = gr.Dropdown(
-                choices=[
-                    "gemma2",
-                    "llama3.1",
-                    "mistral",
-                    "phi3"
-                ],
-                value="gemma2",
-                label="AI Model"
+        model = gr.Dropdown(
+        choices=[
+            "gemma2",
+            "llama3.1",
+            "mistral",
+            "phi3"
+        ],
+        value="gemma2",
+        label="AI Model"
+    )
+
+        language = gr.Dropdown(
+        choices=LANGUAGES,
+        value=DEFAULT_LANGUAGE,
+        label="🌍 Language"
+    )
+
+        pdf_file = gr.File(
+        label="📄 Upload PDF",
+        file_types=[".pdf"]
             )
 
-            pdf_file = gr.File(
-                label="📄 Upload PDF",
-                file_types=[".pdf"]
-            )
-
-            pdf_status = gr.Textbox(
+        pdf_status = gr.Textbox(
                 label="PDF Status",
                 interactive=False
             )
-
-            clear = gr.Button(
-                "🗑 Clear Chat"
+        clear = gr.Button(
+             "🗑️ Clear Chat",
+            variant="stop"
             )
 
 
         with gr.Column(scale=4):
 
-            chatbot = gr.Chatbot(
-                height=650
-            )
-
-            msg = gr.Textbox(
-                placeholder="Ask something..."
-            )
+           chatbot = gr.Chatbot(
+            height=650,
+            show_label=False,
+                )
+           
+        msg = gr.Textbox(
+    placeholder="💬 سوالت را بنویس و Enter بزن...",
+    label="Chat",
+    lines=1
+)
+   
 
 
     pdf_file.change(
@@ -158,11 +176,12 @@ with gr.Blocks(
 
     msg.submit(
         chat,
-        inputs=[
-            msg,
-            chatbot,
-            model
-        ],
+     inputs=[
+    msg,
+    chatbot,
+    model,
+    language
+] ,
         outputs=[
             msg,
             chatbot
