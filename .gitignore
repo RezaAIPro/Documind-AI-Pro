@@ -1,10 +1,12 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
 
 # Virtual Environment
 .venv/
 venv/
+env/
 
 # VS Code
 .vscode/
@@ -15,11 +17,25 @@ models/
 *.bin
 *.safetensors
 
+# Vector Database
+vector_store/
+vector_stor/
+
+# Chat Data
+chat_history.json
+*.json
+
 # Cache
 .cache/
+.cache/*
+.pytest_cache/
 
 # Logs
 *.log
+
+# Uploads
+uploads/
+documents/
 
 # OS
 .DS_Store
